@@ -45,8 +45,8 @@ def data_fraction(dataset):
                                    numpy.random.choice(len(dataset), int(len(dataset) * fraction), replace=False))
 
 
-image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x)),
-                                          data_transforms[x])
+image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x),
+                                          data_transforms[x]))
                   for x in ['train', 'val']}
 
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=batch_size,
