@@ -9,13 +9,25 @@ import time
 import copy
 import numpy
 
+import datetime
+
 from torch.optim import lr_scheduler
 from torchvision import datasets
 from efficientnet_pytorch import EfficientNet
 
+
+def convert_to_preferred_format(sec):
+    sec = sec % (24 * 3600)
+    hour = sec // 3600
+    sec %= 3600
+    min = sec // 60
+    sec %= 60
+    return "%02d:%02d:%02d" % (hour, min, sec)
+
+
 '''hyper parameter'''
 num_classes = 17
-batch_size = 16
+batch_size = 32
 epochs = 30
 
 data_dir = '../DL_Final/barkSNU/'
@@ -36,7 +48,7 @@ data_transforms = {
     ])
 }
 
-fraction = 0.1
+fraction = 0.03
 
 
 def data_fraction(dataset):
@@ -45,11 +57,10 @@ def data_fraction(dataset):
 
 
 image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x),
-                                          data_transforms[x]))
+                                                        data_transforms[x]))
                   for x in ['train', 'val']}
 
 print(len(image_datasets['train']))
-
 
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=batch_size,
                                               shuffle=True, num_workers=4)
@@ -60,7 +71,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 
 ''' data load '''
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
+print(device)
 model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=num_classes)
 model.to(device)
 
@@ -106,7 +117,8 @@ for epoch in range(epochs):
             running_corrects += torch.sum(preds == labels.data)
 
             if batch_idx % 30 == 0:
-                print(f'epoch: {epoch}, batch_idx: {batch_idx}, time: {time.time() - since}\n')
+                print(
+                    f'epoch: {epoch}, batch_idx: {batch_idx}, time: {convert_to_preferred_format(time.time() - since)}')
 
         if phase == 'train':
             scheduler.step()
