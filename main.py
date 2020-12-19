@@ -10,13 +10,13 @@ from torch.optim import lr_scheduler
 from torchvision import datasets
 from efficientnet_pytorch import EfficientNet
 
-#from torchsummary import summary
+# from torchsummary import summary
 from efficientnet_pytorch import EfficientNet
 
 model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=17)
 
 # summary(model, input_size=(3, 331, 331), device='cpu')
-	
+
 batch_size = 16
 epochs = 30
 data_dir = '../DL_Final/barkSNU/'
@@ -92,7 +92,8 @@ def train_val_dataset(dataset, val_split=0.25):
     return datasets
 
 
-dataset = ImageFolder(data_dir, transform=Compose([Resize((200, 200)), ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
+dataset = ImageFolder(data_dir, transform=Compose(
+    [Resize((200, 200)), ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
 datasets = train_val_dataset(dataset)
 # The original dataset is available in the Subset class
 print(datasets['train'].dataset)
@@ -100,7 +101,6 @@ print(datasets['train'].dataset)
 # datasets['train'] = ApplyTransform(datasets['train'], transforms.RandomHorizontalFlip())
 
 dataset_sizes = {"train": len(datasets['train']), "val": len(datasets['train'])}
-
 
 dataloaders = {x: DataLoader(datasets[x], 32, shuffle=True, num_workers=4) for x in ['train', 'val']}
 x, y = next(iter(dataloaders['train']))
@@ -151,8 +151,8 @@ for epoch in range(epochs):
 
             running_loss += loss.item() * inputs.size(0)
             running_corrects += torch.sum(preds == labels.data)
-            if batch_idx % 60 == 0:
-		print("epoch:%d, batch:%d" % (epoch, batch_idx))
+            if batch_idx % 30 == 0:
+                print("epoch:%d, batch:%d" % (epoch, batch_idx))
 
         if phase == 'train':
             scheduler.step()
@@ -162,13 +162,13 @@ for epoch in range(epochs):
         # writer.add_graph('epoch loss', epoch_loss, epoch)
         # writer.add_graph('epoch acc', epoch_acc, epoch)
 
-        print('{} Loss: {:.4f} Acc: {:.4f}'.format(
-            phase, epoch_loss, epoch_acc))
+        print('{} Loss: {:.4f} Acc: {:.4f}'.format(phase, epoch_loss, epoch_acc))
+        f = open('./wow.txt', 'w')
+        f.write('{} Loss: {:.4f} Acc: {:.4f}\n'.format(phase, epoch_loss, epoch_acc))
+        f.close()
 
         if phase == 'val' and epoch_acc > best_acc:
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
-	
-	torch.save(best_model_weights, './weights/best_weights_b5_class_15.pth') 
 
-
+    torch.save(best_model_weights, './weights/best_weights_b5_class_15.pth')
