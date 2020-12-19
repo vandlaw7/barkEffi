@@ -97,7 +97,7 @@ dataset = ImageFolder(data_dir, transform=Compose(
 
 dataset.samples = [dataset.samples[idx] for idx in range(5000)]
 dataset.targets = [dataset.targets[idx] for idx in range(5000)]
-
+print(len(dataset))
 datasets = train_val_dataset(dataset)
 # The original dataset is available in the Subset class
 print(datasets['train'].dataset)
