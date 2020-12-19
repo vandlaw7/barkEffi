@@ -1,5 +1,6 @@
 import torch
 from efficientnet_pytorch import EfficientNet
+from torch.optim import lr_scheduler
 
 import torch.optim as optim
 import torch.nn as nn
