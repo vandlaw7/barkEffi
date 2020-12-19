@@ -16,7 +16,7 @@ from efficientnet_pytorch import EfficientNet
 model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=17)
 
 # summary(model, input_size=(3, 331, 331), device='cpu')
-
+	
 batch_size = 16
 epochs = 30
 data_dir = '../DL_Final/barkSNU/'
@@ -92,7 +92,7 @@ def train_val_dataset(dataset, val_split=0.25):
     return datasets
 
 
-dataset = ImageFolder(data_dir, transform=Compose([Resize((200, 200)), ToTensor()]))
+dataset = ImageFolder(data_dir, transform=Compose([Resize((200, 200)), ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
 datasets = train_val_dataset(dataset)
 # The original dataset is available in the Subset class
 print(datasets['train'].dataset)
@@ -151,7 +151,8 @@ for epoch in range(epochs):
 
             running_loss += loss.item() * inputs.size(0)
             running_corrects += torch.sum(preds == labels.data)
-            print("epoch:%d, batch:%d" % (epoch, batch_idx))
+            if batch_idx % 60 == 0:
+		print("epoch:%d, batch:%d" % (epoch, batch_idx))
 
         if phase == 'train':
             scheduler.step()
@@ -167,3 +168,7 @@ for epoch in range(epochs):
         if phase == 'val' and epoch_acc > best_acc:
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
+	
+	torch.save(best_model_weights, './weights/best_weights_b5_class_15.pth') 
+
+
