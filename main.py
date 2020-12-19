@@ -9,19 +9,18 @@ import copy
 from torch.optim import lr_scheduler
 from torchvision import datasets
 from efficientnet_pytorch import EfficientNet
-from torch.utils.tensorboard import SummaryWriter
 
-from torchsummary import summary
+#from torchsummary import summary
 from efficientnet_pytorch import EfficientNet
 
 model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=17)
 
-summary(model, input_size=(3, 331, 331), device='cpu')
+# summary(model, input_size=(3, 331, 331), device='cpu')
 
 batch_size = 16
 epochs = 30
 data_dir = '../DL_Final/barkSNU/'
-writer = SummaryWriter('./runs/experiment1/')
+# writer = SummaryWriter('./runs/experiment1/')
 test_split = 0.25
 
 data_transforms = {'train': transforms.Compose([
@@ -97,10 +96,10 @@ dataset = ImageFolder(data_dir, transform=Compose([Resize((200, 200)), ToTensor(
 datasets = train_val_dataset(dataset)
 # The original dataset is available in the Subset class
 print(datasets['train'].dataset)
-datasets['train'] = ApplyTransform(datasets['train'], transforms.RandomRotation(30))
-datasets['train'] = ApplyTransform(datasets['train'], transforms.RandomHorizontalFlip())
+# datasets['train'] = ApplyTransform(datasets['train'], transforms.RandomRotation(30))
+# datasets['train'] = ApplyTransform(datasets['train'], transforms.RandomHorizontalFlip())
 
-dataset_sizes = {"train": len(datasets['train']), "test": len(datasets['train'])}
+dataset_sizes = {"train": len(datasets['train']), "val": len(datasets['train'])}
 
 
 dataloaders = {x: DataLoader(datasets[x], 32, shuffle=True, num_workers=4) for x in ['train', 'val']}
