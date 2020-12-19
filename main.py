@@ -20,7 +20,7 @@ summary(model, input_size=(3, 331, 331), device='cpu')
 
 batch_size = 16
 epochs = 30
-data_dir = '../fromAG/barkSNU/'
+data_dir = '../DL_Final/barkSNU/'
 writer = SummaryWriter('./runs/experiment1/')
 test_split = 0.25
 
