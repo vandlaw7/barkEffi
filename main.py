@@ -157,7 +157,8 @@ for epoch in range(epochs):
             running_loss += loss.item() * inputs.size(0)
             running_corrects += torch.sum(preds == labels.data)
             if batch_idx % 30 == 0:
-                print("epoch:%d, batch:%d" % (epoch, batch_idx))
+                now = time.time()
+                print("epoch:%d, batch:%d, %f" % (epoch, batch_idx, (now - since) / 1000), )
 
         if phase == 'train':
             scheduler.step()
