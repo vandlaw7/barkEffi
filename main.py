@@ -24,7 +24,7 @@ data_dir = '../DL_Final/barkSNU/'
 ''' data pre-process'''
 data_transforms = {
     'train': transforms.Compose([
-        transforms.Resize(200, 200),
+        transforms.Resize((200, 200)),
         transforms.ColorJitter(brightness=(0.7, 1.3)),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
@@ -33,7 +33,7 @@ data_transforms = {
     'val': transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-        transforms.Resize(200, 200)
+        transforms.Resize((200, 200))
     ])
 }
 
