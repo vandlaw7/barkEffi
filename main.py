@@ -49,6 +49,9 @@ image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x
                                           data_transforms[x]))
                   for x in ['train', 'val']}
 
+print(len(image_datasets['train']))
+
+
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=batch_size,
                                               shuffle=True, num_workers=4)
                for x in ['train', 'val']}
@@ -116,6 +119,9 @@ for epoch in range(epochs):
 
         print('{} Loss: {:.4f} Acc: {:.4f}'.format(
             phase, epoch_loss, epoch_acc))
+        f = open('./wow.txt', 'w')
+        f.write('{} Loss: {:.4f} Acc: {:.4f}\n'.format(phase, epoch_loss, epoch_acc))
+        f.close()
 
         if phase == 'val' and epoch_acc > best_acc:
             best_acc = epoch_acc
