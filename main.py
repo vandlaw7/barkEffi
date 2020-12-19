@@ -94,6 +94,10 @@ def train_val_dataset(dataset, val_split=0.25):
 
 dataset = ImageFolder(data_dir, transform=Compose(
     [Resize((200, 200)), ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
+
+dataset.samples = [dataset.samples[idx] for idx in range(5000)]
+dataset.targets = [dataset.targets[idx] for idx in range(5000)]
+
 datasets = train_val_dataset(dataset)
 # The original dataset is available in the Subset class
 print(datasets['train'].dataset)
