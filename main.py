@@ -83,6 +83,7 @@ from sklearn.model_selection import train_test_split
 from torchvision.transforms import Compose, ToTensor, Resize
 from torch.utils.data import DataLoader
 
+import numpy
 
 def train_val_dataset(dataset, val_split=0.25):
     train_idx, val_idx = train_test_split(list(range(len(dataset))), test_size=val_split)
@@ -95,10 +96,10 @@ def train_val_dataset(dataset, val_split=0.25):
 dataset = ImageFolder(data_dir, transform=Compose(
     [Resize((200, 200)), ToTensor(), transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]))
 
-dataset.samples = [dataset.samples[idx] for idx in range(5000)]
-dataset.targets = [dataset.targets[idx] for idx in range(5000)]
-print(len(dataset))
-datasets = train_val_dataset(dataset)
+dataset_subset = torch.utils.data.Subset(dataset, numpy.random.choice(len(dataset), 5000, replace=False))
+
+print(len(dataset_subset))
+datasets = train_val_dataset(dataset_subset)
 # The original dataset is available in the Subset class
 print(datasets['train'].dataset)
 # datasets['train'] = ApplyTransform(datasets['train'], transforms.RandomRotation(30))
