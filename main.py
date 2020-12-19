@@ -70,7 +70,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 # class_names = image_datasets['train'].classes
 
 ''' data load '''
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = "cuda:0"
 print(device)
 model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=num_classes)
 model.to(device)
