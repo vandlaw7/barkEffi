@@ -24,6 +24,7 @@ def convert_to_preferred_format(sec):
     sec %= 60
     return "%02d:%02d:%02d" % (hour, min, sec)
 
+torch.cuda.empty_cache()
 
 '''hyper parameter'''
 num_classes = 17
