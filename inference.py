@@ -34,6 +34,7 @@ def data_fraction(dataset, fraction=fraction):
 
 
 test_transform = transforms.Compose([
+    transforms.CenterCrop(),
     transforms.Resize((200, 200)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),

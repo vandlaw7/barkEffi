@@ -149,6 +149,6 @@ for epoch in range(epochs):
             f.write('new record!')
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
-            torch.save(best_model_weights, './weights/best_weights_b5_class_15.pth')
+            torch.save(best_model_weights, './weights/best_weights_b0_class_17.pth')
 
         f.close()
