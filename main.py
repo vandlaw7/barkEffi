@@ -29,8 +29,8 @@ torch.cuda.empty_cache()
 
 '''hyper parameter'''
 num_classes = 17
-batch_size = 4
-epochs = 10
+batch_size = 16
+epochs = 20
 
 fraction = 0.1
 effi_version = 0
@@ -150,6 +150,13 @@ for epoch in range(epochs):
             f.write('new record!')
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
-            torch.save(best_model_weights, './weights/best_weights_b0_class_17.pth')
+            torch.save(best_model_weights, './weights/best_weights_b0_class_17_aug.pth')
+            torch.save({
+                'epoch': epoch,
+                'model_state_dict': model.state_dict(),
+                'optimizer_state_dict': optimizer.state_dict(),
+                'epoch_loss': epoch_loss,
+                'epoch_acc': epoch_acc
+            }, './weights/best_weights_b0_class_17__aug_chk.pth')
 
         f.close()
