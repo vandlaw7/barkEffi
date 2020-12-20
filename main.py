@@ -28,8 +28,8 @@ torch.cuda.empty_cache()
 
 '''hyper parameter'''
 num_classes = 17
-batch_size = 8
-epochs = 30
+batch_size = 4
+epochs = 20
 
 
 data_dir = '../DL_Final/barkSNU/'
@@ -50,7 +50,7 @@ data_transforms = {
     ])
 }
 
-fraction = 0.03
+fraction = 1.0
 
 
 def data_fraction(dataset):
@@ -128,7 +128,7 @@ for epoch in range(epochs):
 
             if batch_idx % check_period == 0:
                 print(
-                    f'epoch: {epoch}, batch_idx: {batch_idx} / {batch_idx_max_train if phase == "train" else batch_idx_max_val}, \time: {convert_to_preferred_format(time.time() - since)}')
+                    f'epoch: {epoch}, batch_idx: {batch_idx} / {batch_idx_max_train if phase == "train" else batch_idx_max_val}, time: {convert_to_preferred_format(time.time() - since)}')
 
         if phase == 'train':
             scheduler.step()
@@ -142,9 +142,12 @@ for epoch in range(epochs):
             phase, epoch_loss, epoch_acc))
         f = open('./wow.txt', 'w')
         f.write('{} Loss: {:.4f} Acc: {:.4f}\n'.format(phase, epoch_loss, epoch_acc))
-        f.close()
 
         if phase == 'val' and epoch_acc > best_acc:
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
             torch.save(best_model_weights, './weights/best_weights_b5_class_15.pth')
+            print('new record!')
+            f.write('new record!')
+
+        f.close()
