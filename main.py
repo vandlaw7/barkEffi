@@ -31,6 +31,7 @@ num_classes = 17
 batch_size = 8
 epochs = 30
 
+
 data_dir = '../DL_Final/barkSNU/'
 
 ''' data pre-process'''
@@ -63,6 +64,9 @@ image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x
 
 print(len(image_datasets['train']))
 batch_idx_max_train = len(image_datasets['train']) // batch_size
+
+check_period = batch_idx_max_train // 5
+
 print(len(image_datasets['val']))
 batch_idx_max_val = len(image_datasets['val']) // batch_size
 
@@ -122,11 +126,9 @@ for epoch in range(epochs):
             running_loss += loss.item() * inputs.size(0)
             running_corrects += torch.sum(preds == labels.data)
 
-            if batch_idx % 10 == 0:
+            if batch_idx % check_period == 0:
                 print(
-                    f'epoch: {epoch}, batch_idx: {batch_idx} / \
-                    { batch_idx_max_train if phase == "train" else batch_idx_max_val  }, \
-                    time: {convert_to_preferred_format(time.time() - since)}')
+                    f'epoch: {epoch}, batch_idx: {batch_idx} / {batch_idx_max_train if phase == "train" else batch_idx_max_val}, \time: {convert_to_preferred_format(time.time() - since)}')
 
         if phase == 'train':
             scheduler.step()
