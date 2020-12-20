@@ -189,6 +189,5 @@ for i in range(10):
 
     f = open('./test_result.txt', 'a')
     print(f'total loss: {total_loss}, total accuracy: {total_acc}')
-    f.write(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH} ')
-    f.write(f'total loss: {total_loss}, total accuracy: {total_acc}\n')
+    f.write(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH} total loss: {total_loss}, total accuracy: {total_acc}\n')
     f.close()
