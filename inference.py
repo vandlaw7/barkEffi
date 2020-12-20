@@ -43,6 +43,9 @@ print(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH}')
 if __name__ == '__main__':
     main(sys.argv)
 
+print(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH}')
+
+
 effi_version = 0
 num_classes = 17
 
