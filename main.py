@@ -30,9 +30,9 @@ torch.cuda.empty_cache()
 '''hyper parameter'''
 num_classes = 17
 batch_size = 4
-epochs = 20
+epochs = 10
 
-fraction = 1.0
+fraction = 0.1
 effi_version = 0
 
 check_period = 100
@@ -46,6 +46,7 @@ data_transforms = {
         transforms.ColorJitter(brightness=(0.7, 1.3)),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
+        transforms.RandomErasing(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
     'val': transforms.Compose([
@@ -141,7 +142,7 @@ for epoch in range(epochs):
 
         print('{} Loss: {:.4f} Acc: {:.4f}'.format(
             phase, epoch_loss, epoch_acc))
-        f = open('./wow.txt', 'a')
+        f = open('./val.txt', 'a')
         f.write('{} Loss: {:.4f} Acc: {:.4f}\n'.format(phase, epoch_loss, epoch_acc))
 
         if phase == 'val' and epoch_acc > best_acc:
