@@ -74,10 +74,8 @@ class RandomCropMy(object):
 
             crop_image = image.crop((left, upper, left + new_w, upper + new_h))
             green_record = how_much_green_dominated(crop_image, gap)
-            print(green_record)
             if green_record > threshold:
                 iteration += 1
-                print('oops')
                 if green_record < green_best:
                     green_best = green_record
                     best_image = crop_image
