@@ -12,7 +12,31 @@ from torchvision import datasets, transforms
 
 from efficientnet_pytorch import EfficientNet
 
-ESCAPE_GREEN = True
+import sys
+import getopt
+
+GREEN_DATASET = False
+
+
+def main(argv):
+    try:
+        opts, etc_args = getopt.getopt(argv[1:], "g")
+    except getopt.GetoptError:
+        print("error")
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if opt == '-g':
+            print("green dataset selection")
+            GREEN_DATASET = True
+        else:
+            print("while hinder data selection")
+
+    return
+
+
+if __name__ == '__main__':
+    main(sys.argv)
 
 effi_version = 0
 num_classes = 17
@@ -105,7 +129,7 @@ new_transform = transforms.Compose([
 ])
 
 test_image_dataset = data_fraction(
-    datasets.ImageFolder(INPUT_PATH, (new_transform if ESCAPE_GREEN else test_transform)))
+    datasets.ImageFolder(INPUT_PATH, (new_transform if GREEN_DATASET else test_transform)))
 test_set_size = len(test_image_dataset)
 max_batch_idx = test_set_size // BATCH_SIZE
 
