@@ -142,14 +142,15 @@ for epoch in range(epochs):
 
         print('{} Loss: {:.4f} Acc: {:.4f}'.format(
             phase, epoch_loss, epoch_acc))
-        f = open('./wow.txt', 'w')
+        f = open('./wow.txt', 'a')
         f.write('{} Loss: {:.4f} Acc: {:.4f}\n'.format(phase, epoch_loss, epoch_acc))
 
         if phase == 'val' and epoch_acc > best_acc:
+            print('new record!')
+            f.write('new record!')
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
             torch.save(best_model_weights, './weights/best_weights_b5_class_15.pth')
-            print('new record!')
-            f.write('new record!')
+            
 
         f.close()
