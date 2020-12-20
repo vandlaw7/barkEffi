@@ -65,7 +65,7 @@ image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x
 print(len(image_datasets['train']))
 batch_idx_max_train = len(image_datasets['train']) // batch_size
 
-check_period = batch_idx_max_train // 5
+check_period = batch_idx_max_train // 20
 
 print(len(image_datasets['val']))
 batch_idx_max_val = len(image_datasets['val']) // batch_size
@@ -80,7 +80,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 ''' data load '''
 device = "cuda:0"
 print(device)
-model = EfficientNet.from_pretrained('efficientnet-b3', num_classes=num_classes)
+model = EfficientNet.from_pretrained('efficientnet-b5', num_classes=num_classes)
 model.to(device)
 
 optimizer = optim.Adam(model.parameters(), lr=0.001)
