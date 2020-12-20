@@ -19,6 +19,7 @@ GREEN_ESCAPE = False
 INPUT_PATH = '../DL_Final/barkSNU/hinder_test'
 
 def main(argv):
+    global INPUT_PATH, GREEN_ESCAPE
     try:
         opts, etc_args = getopt.getopt(argv[1:], "dt")
     except getopt.GetoptError:
