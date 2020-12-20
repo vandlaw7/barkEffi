@@ -21,12 +21,11 @@ N_EPOCHS = 5
 HEIGHT = 137
 WIDTH = 236
 
-check_period = 100
-
 INPUT_PATH = '../DL_Final/barkSNU/test'
 WEIGHTS_FILE = './weights/best_weights_b5_class_15.pth'
 
 fraction = 0.1
+check_period = 100 * fraction
 
 
 def data_fraction(dataset, fraction=fraction):
