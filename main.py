@@ -31,6 +31,8 @@ num_classes = 17
 batch_size = 4
 epochs = 20
 
+fraction = 0.2
+effi_version = 0
 
 data_dir = '../DL_Final/barkSNU/'
 
@@ -50,7 +52,6 @@ data_transforms = {
     ])
 }
 
-fraction = 1.0
 
 
 def data_fraction(dataset):
@@ -80,7 +81,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 ''' data load '''
 device = "cuda:0"
 print(device)
-model = EfficientNet.from_pretrained('efficientnet-b3', num_classes=num_classes)
+model = EfficientNet.from_pretrained(f'efficientnet-b{effi_version}', num_classes=num_classes)
 model.to(device)
 
 optimizer = optim.Adam(model.parameters(), lr=0.001)
