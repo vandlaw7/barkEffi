@@ -32,7 +32,7 @@ num_classes = 17
 batch_size = 64
 epochs = 20
 
-fraction = 0.3
+fraction = 0.5
 effi_version = 0
 
 check_period = 100 * fraction
@@ -73,7 +73,7 @@ model.to(device)
 
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 criterion = nn.CrossEntropyLoss()
-scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+scheduler = lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
 since = time.time()
 
@@ -81,7 +81,8 @@ best_model_weights = copy.deepcopy(model.state_dict())
 best_acc = 0.0
 
 for epoch in range(epochs):
-    print('Epoch {}/{}'.format(epoch + 1, epochs))
+
+    print('Epoch {}/{}'.format(epoch , epochs-1))
     print('-' * 10)
 
     image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x),
@@ -149,13 +150,13 @@ for epoch in range(epochs):
             f.write('new record!')
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
-            torch.save(best_model_weights, './weights/best_weights_b0_class_17_aug.pth')
+            torch.save(best_model_weights, './weights/best_weights_b0_class_17_aug_50.pth')
             torch.save({
                 'epoch': epoch,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
                 'epoch_loss': epoch_loss,
                 'epoch_acc': epoch_acc
-            }, './weights/best_weights_b0_class_17__aug_chk.pth')
+            }, './weights/best_weights_b0_class_17_aug_chk_50.pth')
 
         f.close()
