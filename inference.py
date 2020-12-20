@@ -12,6 +12,8 @@ from torchvision import datasets, transforms
 
 from efficientnet_pytorch import EfficientNet
 
+ESCAPE_GREEN = False
+
 effi_version = 0
 num_classes = 17
 
@@ -91,12 +93,19 @@ def data_fraction(dataset, fraction=fraction):
 
 
 test_transform = transforms.Compose([
+    transforms.CenterCrop(200),
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+])
+
+new_transform = transforms.Compose([
     RandomCropMy(200),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
 ])
 
-test_image_dataset = data_fraction(datasets.ImageFolder(INPUT_PATH, test_transform))
+test_image_dataset = data_fraction(
+    datasets.ImageFolder(INPUT_PATH, (new_transform if ESCAPE_GREEN else test_transform)))
 test_set_size = len(test_image_dataset)
 max_batch_idx = test_set_size // BATCH_SIZE
 
