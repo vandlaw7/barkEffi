@@ -29,10 +29,10 @@ torch.cuda.empty_cache()
 
 '''hyper parameter'''
 num_classes = 17
-batch_size = 64
+batch_size = 128
 epochs = 20
 
-fraction = 0.3
+fraction = 0.25
 effi_version = 0
 
 check_period = 100 * fraction
