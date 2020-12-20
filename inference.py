@@ -36,6 +36,7 @@ def main(argv):
 
     return
 
+print(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH})
 
 if __name__ == '__main__':
     main(sys.argv)
