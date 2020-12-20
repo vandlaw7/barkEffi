@@ -27,7 +27,7 @@ def convert_to_preferred_format(sec):
 
 '''hyper parameter'''
 num_classes = 17
-batch_size = 32
+batch_size = 64
 epochs = 30
 
 data_dir = '../DL_Final/barkSNU/'
@@ -72,7 +72,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 ''' data load '''
 device = "cuda:0"
 print(device)
-model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=num_classes)
+model = EfficientNet.from_pretrained('efficientnet-b3', num_classes=num_classes)
 model.to(device)
 
 optimizer = optim.Adam(model.parameters(), lr=0.001)
