@@ -1,5 +1,6 @@
 import time
 import numpy
+import numpy as np
 
 import torch
 from torch import optim, nn
@@ -27,6 +28,64 @@ WEIGHTS_FILE = './weights/best_weights_b0_class_17.pth'
 fraction = 1
 check_period = 100 * fraction
 
+'''crop selection to escape green hinder'''
+GREEN_GAP = 5
+GREEN_THRESHOLD = 0.1
+GREEN_ITERATION_MAX = 20
+
+
+def how_much_green_dominated(image, gap=GREEN_GAP):
+    w, h = image.size
+    green_win = 0
+    rgb_im = image.convert('RGB')
+    for i in range(w):
+        for j in range(h):
+            r, g, b = rgb_im.getpixel((i, j))
+            if g > r + gap and g > b + gap:
+                green_win += 1
+
+    return green_win / (w * h)
+
+
+def is_green_dominated(image, gap=GREEN_GAP, threshold=GREEN_THRESHOLD):
+    return how_much_green_dominated(image, gap) > threshold
+
+
+class RandomCropMy(object):
+    def __init__(self, output_size):
+        assert isinstance(output_size, (int, tuple))
+        if isinstance(output_size, int):
+            self.output_size = (output_size, output_size)
+        else:
+            assert len(output_size) == 2
+            self.output_size = output_size
+
+    def __call__(self, image, gap=GREEN_GAP, threshold=GREEN_THRESHOLD,
+                 iteration_max=GREEN_ITERATION_MAX):
+        w, h = image.size
+        new_w, new_h = self.output_size
+
+        iteration = 0
+        best_image = image
+        green_best = 1
+        while iteration < iteration_max:
+            left = np.random.randint(0, w - new_w)
+            upper = np.random.randint(0, h - new_h)
+
+            crop_image = image.crop((left, upper, left + new_w, upper + new_h))
+            green_record = how_much_green_dominated(crop_image, gap)
+            print(green_record)
+            if green_record > threshold:
+                iteration += 1
+                print('oops')
+                if green_record < green_best:
+                    green_best = green_record
+                    best_image = crop_image
+            else:
+                return crop_image
+
+        return best_image
+
 
 def data_fraction(dataset, fraction=fraction):
     return torch.utils.data.Subset(dataset,
@@ -34,7 +93,7 @@ def data_fraction(dataset, fraction=fraction):
 
 
 test_transform = transforms.Compose([
-    transforms.CenterCrop(200),
+    RandomCropMy(200),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
 ])
