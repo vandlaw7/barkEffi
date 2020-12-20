@@ -22,7 +22,7 @@ HEIGHT = 137
 WIDTH = 236
 
 INPUT_PATH = '../DL_Final/barkSNU/hinder_test'
-WEIGHTS_FILE = './weights/best_weights_b5_class_15.pth'
+WEIGHTS_FILE = './weights/best_weights_b0_class_17.pth'
 
 fraction = 1
 check_period = 100 * fraction
