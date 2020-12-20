@@ -31,8 +31,10 @@ num_classes = 17
 batch_size = 4
 epochs = 20
 
-fraction = 0.2
+fraction = 1.0
 effi_version = 0
+
+check_period = 100
 
 data_dir = '../DL_Final/barkSNU/'
 
@@ -66,7 +68,6 @@ image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x
 print(len(image_datasets['train']))
 batch_idx_max_train = len(image_datasets['train']) // batch_size
 
-check_period = batch_idx_max_train // 100
 
 print(len(image_datasets['val']))
 batch_idx_max_val = len(image_datasets['val']) // batch_size
