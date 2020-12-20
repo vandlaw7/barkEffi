@@ -35,7 +35,7 @@ epochs = 20
 fraction = 0.3
 effi_version = 0
 
-check_period = 100
+check_period = 100 * fraction
 
 data_dir = '../DL_Final/barkSNU/'
 
