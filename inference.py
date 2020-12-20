@@ -22,7 +22,7 @@ N_EPOCHS = 5
 HEIGHT = 137
 WIDTH = 236
 
-INPUT_PATH = '../DL_Final/barkSNU/hinder_test'
+INPUT_PATH = '../DL_Final/barkSNU/green_hinder'
 WEIGHTS_FILE = './weights/best_weights_b0_class_17.pth'
 
 fraction = 1
