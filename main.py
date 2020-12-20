@@ -27,7 +27,7 @@ def convert_to_preferred_format(sec):
 
 '''hyper parameter'''
 num_classes = 17
-batch_size = 64
+batch_size = 8
 epochs = 30
 
 data_dir = '../DL_Final/barkSNU/'
@@ -61,6 +61,9 @@ image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x
                   for x in ['train', 'val']}
 
 print(len(image_datasets['train']))
+batch_idx_max_train = len(image_datasets['train']) // batch_size
+print(len(image_datasets['val']))
+batch_idx_max_val = len(image_datasets['val']) // batch_size
 
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=batch_size,
                                               shuffle=True, num_workers=4)
@@ -91,9 +94,11 @@ for epoch in range(epochs):
     for phase in ['train', 'val']:
         if phase == 'train':
             model.train()
+            print("train")
 
         else:
             model.eval()
+            print("val")
 
         running_loss = 0.0
         running_corrects = 0
@@ -116,9 +121,11 @@ for epoch in range(epochs):
             running_loss += loss.item() * inputs.size(0)
             running_corrects += torch.sum(preds == labels.data)
 
-            if batch_idx % 30 == 0:
+            if batch_idx % 10 == 0:
                 print(
-                    f'epoch: {epoch}, batch_idx: {batch_idx}, time: {convert_to_preferred_format(time.time() - since)}')
+                    f'epoch: {epoch}, batch_idx: {batch_idx} / \
+                    { batch_idx_max_train if phase == "train" else batch_idx_max_val  }, \
+                    time: {convert_to_preferred_format(time.time() - since)}')
 
         if phase == 'train':
             scheduler.step()
