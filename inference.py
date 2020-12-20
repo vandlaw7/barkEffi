@@ -18,6 +18,7 @@ import getopt
 GREEN_ESCAPE = False
 INPUT_PATH = '../DL_Final/barkSNU/hinder_test'
 
+
 def main(argv):
     global INPUT_PATH, GREEN_ESCAPE
     try:
@@ -36,7 +37,8 @@ def main(argv):
 
     return
 
-print(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH})
+
+print(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH}')
 
 if __name__ == '__main__':
     main(sys.argv)
