@@ -1,12 +1,13 @@
 import time
-import torch
+import numpy
 
+import torch
 from torch import optim, nn
+
 from torch.optim import lr_scheduler
+from torch.utils.data import Dataset, DataLoader
 
 from torchvision import datasets, transforms
-
-from torch.utils.data import Dataset, DataLoader
 
 from efficientnet_pytorch import EfficientNet
 
@@ -20,10 +21,18 @@ N_EPOCHS = 5
 HEIGHT = 137
 WIDTH = 236
 
-check_period = 10
+check_period = 100
 
 INPUT_PATH = '../DL_Final/barkSNU/test'
 WEIGHTS_FILE = './weights/best_weights_b5_class_15.pth'
+
+fraction = 0.1
+
+
+def data_fraction(dataset, fraction=fraction):
+    return torch.utils.data.Subset(dataset,
+                                   numpy.random.choice(len(dataset), int(len(dataset) * fraction), replace=False))
+
 
 test_transform = transforms.Compose([
     transforms.Resize((200, 200)),
@@ -31,8 +40,9 @@ test_transform = transforms.Compose([
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
 ])
 
-test_image_dataset = datasets.ImageFolder(INPUT_PATH, test_transform)
+test_image_dataset = data_fraction(datasets.ImageFolder(INPUT_PATH, test_transform))
 test_set_size = len(test_image_dataset)
+max_batch_idx = test_set_size // BATCH_SIZE
 
 test_image_loaded = DataLoader(test_image_dataset, batch_size=BATCH_SIZE,
                                shuffle=False, num_workers=4)
@@ -75,10 +85,13 @@ for batch_idx, (inputs, labels) in enumerate(test_image_loaded):
     running_corrects += torch.sum(preds == labels.data)
 
     if batch_idx % check_period == 0:
-        print(f'batch_idx: {batch_idx}, '
+        print(f'batch_idx: {batch_idx} / {max_batch_idx}, '
               f'time: {convert_to_preferred_format(time.time() - since)}')
 
 total_loss = running_loss / test_set_size
 total_acc = running_corrects.double() / test_set_size
 
-print(f'total loss: {total_loss}, total accuracy: {total_acc} ')
+f = open('./test_result.txt', 'a')
+print(f'total loss: {total_loss}, total accuracy: {total_acc}')
+f.write(f'total loss: {total_loss}, total accuracy: {total_acc}\n')
+f.close()

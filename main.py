@@ -24,6 +24,7 @@ def convert_to_preferred_format(sec):
     sec %= 60
     return "%02d:%02d:%02d" % (hour, min, sec)
 
+
 torch.cuda.empty_cache()
 
 '''hyper parameter'''
@@ -55,8 +56,7 @@ data_transforms = {
 }
 
 
-
-def data_fraction(dataset):
+def data_fraction(dataset, fraction=fraction):
     return torch.utils.data.Subset(dataset,
                                    numpy.random.choice(len(dataset), int(len(dataset) * fraction), replace=False))
 
@@ -67,7 +67,6 @@ image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x
 
 print(len(image_datasets['train']))
 batch_idx_max_train = len(image_datasets['train']) // batch_size
-
 
 print(len(image_datasets['val']))
 batch_idx_max_val = len(image_datasets['val']) // batch_size
@@ -151,6 +150,5 @@ for epoch in range(epochs):
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
             torch.save(best_model_weights, './weights/best_weights_b5_class_15.pth')
-            
 
         f.close()
