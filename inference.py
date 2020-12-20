@@ -187,7 +187,7 @@ for i in range(10):
     total_loss = running_loss / test_set_size
     total_acc = running_corrects.double() / test_set_size
 
-    f = open('./hinder_test_result_.txt', 'a')
+    f = open('./hinder_test_result.txt', 'a')
     print(f'total loss: {total_loss}, total accuracy: {total_acc}')
     f.write(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH} total loss: {total_loss}, total accuracy: {total_acc}\n')
     f.close()
