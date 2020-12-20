@@ -12,7 +12,7 @@ from torchvision import datasets, transforms
 
 from efficientnet_pytorch import EfficientNet
 
-ESCAPE_GREEN = False
+ESCAPE_GREEN = True
 
 effi_version = 0
 num_classes = 17
