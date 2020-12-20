@@ -65,7 +65,7 @@ image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x
 print(len(image_datasets['train']))
 batch_idx_max_train = len(image_datasets['train']) // batch_size
 
-check_period = batch_idx_max_train // 20
+check_period = batch_idx_max_train // 100
 
 print(len(image_datasets['val']))
 batch_idx_max_val = len(image_datasets['val']) // batch_size
