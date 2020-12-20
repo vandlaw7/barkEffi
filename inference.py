@@ -15,22 +15,23 @@ from efficientnet_pytorch import EfficientNet
 import sys
 import getopt
 
-GREEN_DATASET = False
-
+GREEN_ESCAPE = False
+INPUT_PATH = '../DL_Final/barkSNU/hinder_test'
 
 def main(argv):
     try:
-        opts, etc_args = getopt.getopt(argv[1:], "g")
+        opts, etc_args = getopt.getopt(argv[1:], "dt")
     except getopt.GetoptError:
         print("error")
         sys.exit(2)
 
     for opt, arg in opts:
-        if opt == '-g':
+        if opt == '-d':
             print("green dataset selection")
-            GREEN_DATASET = True
-        else:
-            print("while hinder data selection")
+            INPUT_PATH = '../DL_Final/barkSNU/green_hinder'
+        elif opt == "-t":
+            print("green escape transform")
+            GREEN_ESCAPE = True
 
     return
 
@@ -48,7 +49,6 @@ N_EPOCHS = 5
 HEIGHT = 137
 WIDTH = 236
 
-INPUT_PATH = '../DL_Final/barkSNU/green_hinder'
 WEIGHTS_FILE = './weights/best_weights_b0_class_17.pth'
 
 fraction = 1
@@ -129,7 +129,7 @@ new_transform = transforms.Compose([
 ])
 
 test_image_dataset = data_fraction(
-    datasets.ImageFolder(INPUT_PATH, (new_transform if GREEN_DATASET else test_transform)))
+    datasets.ImageFolder(INPUT_PATH, (new_transform if GREEN_ESCAPE else test_transform)))
 test_set_size = len(test_image_dataset)
 max_batch_idx = test_set_size // BATCH_SIZE
 
