@@ -62,21 +62,7 @@ def data_fraction(dataset, fraction=fraction):
                                    numpy.random.choice(len(dataset), int(len(dataset) * fraction), replace=False))
 
 
-image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x),
-                                                        data_transforms[x]))
-                  for x in ['train', 'val']}
 
-print(len(image_datasets['train']))
-batch_idx_max_train = len(image_datasets['train']) // batch_size
-
-print(len(image_datasets['val']))
-batch_idx_max_val = len(image_datasets['val']) // batch_size
-
-dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=batch_size,
-                                              shuffle=True, num_workers=4)
-               for x in ['train', 'val']}
-
-dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 # class_names = image_datasets['train'].classes
 
 ''' data load '''
@@ -95,8 +81,21 @@ best_model_weights = copy.deepcopy(model.state_dict())
 best_acc = 0.0
 
 for epoch in range(epochs):
-    print('Epoch {}/{}'.format(epoch, epochs - 1))
+    print('Epoch {}/{}'.format(epoch + 1, epochs))
     print('-' * 10)
+
+    image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x),
+                                                            data_transforms[x]))
+                      for x in ['train', 'val']}
+
+    batch_idx_max_train = len(image_datasets['train']) // batch_size
+    batch_idx_max_val = len(image_datasets['val']) // batch_size
+
+    dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=batch_size,
+                                                  shuffle=True, num_workers=4)
+                   for x in ['train', 'val']}
+
+    dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 
     for phase in ['train', 'val']:
         if phase == 'train':
