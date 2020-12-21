@@ -1,0 +1,126 @@
+train Loss: 1.7185 Acc: 0.4621
+val Loss: 1.5680 Acc: 0.5949
+new record!train Loss: 1.2999 Acc: 0.5892
+val Loss: 1.2474 Acc: 0.6271
+new record!train Loss: 1.0920 Acc: 0.6441
+val Loss: 1.0064 Acc: 0.7176
+new record!train Loss: 0.9839 Acc: 0.6763
+val Loss: 0.9211 Acc: 0.7442
+new record!train Loss: 0.9018 Acc: 0.7030
+val Loss: 0.7920 Acc: 0.7637
+new record!train Loss: 0.8336 Acc: 0.7258
+val Loss: 0.7451 Acc: 0.7683
+new record!train Loss: 0.7804 Acc: 0.7482
+val Loss: 0.6434 Acc: 0.8005
+new record!train Loss: 0.5376 Acc: 0.8238
+val Loss: 0.4879 Acc: 0.8486
+new record!train Loss: 0.4451 Acc: 0.8576
+val Loss: 0.4985 Acc: 0.8542
+new record!train Loss: 0.4144 Acc: 0.8605
+val Loss: 0.4554 Acc: 0.8650
+new record!train Loss: 1.1362 Acc: 0.6493
+val Loss: 0.7894 Acc: 0.7673
+new record!train Loss: 1.1070 Acc: 0.6502
+val Loss: 0.7839 Acc: 0.7586
+new record!train Loss: 0.6913 Acc: 0.7695
+val Loss: 0.5736 Acc: 0.8286
+new record!train Loss: 0.6797 Acc: 0.7847
+val Loss: 0.6612 Acc: 0.8246
+new record!train Loss: 0.3677 Acc: 0.8781
+val Loss: 0.3529 Acc: 0.8885
+new record!train Loss: 0.3009 Acc: 0.9000
+val Loss: 0.3233 Acc: 0.8950
+new record!train Loss: 0.7496 Acc: 0.7701
+val Loss: 1.9303 Acc: 0.6245
+new record!train Loss: 0.6740 Acc: 0.7873
+val Loss: 1.0420 Acc: 0.7641
+new record!train Loss: 0.3772 Acc: 0.8766
+val Loss: 0.3863 Acc: 0.8718
+new record!train Loss: 0.3143 Acc: 0.8958
+val Loss: 0.2226 Acc: 0.9269
+new record!train Loss: 0.2763 Acc: 0.9050
+val Loss: 0.2710 Acc: 0.9103
+train Loss: 0.2294 Acc: 0.9236
+val Loss: 0.2560 Acc: 0.9151
+train Loss: 0.2214 Acc: 0.9260
+val Loss: 0.2569 Acc: 0.9197
+train Loss: 0.5711 Acc: 0.8175
+val Loss: 0.3978 Acc: 0.8767
+new record!train Loss: 0.3106 Acc: 0.8950
+val Loss: 0.3853 Acc: 0.8764
+train Loss: 0.2479 Acc: 0.9165
+val Loss: 0.2800 Acc: 0.9157
+new record!train Loss: 0.2158 Acc: 0.9266
+val Loss: 0.2680 Acc: 0.9117
+train Loss: 0.1922 Acc: 0.9356
+val Loss: 0.2291 Acc: 0.9251
+new record!train Loss: 0.1054 Acc: 0.9635
+val Loss: 0.0911 Acc: 0.9674
+new record!train Loss: 0.0808 Acc: 0.9719
+val Loss: 0.0763 Acc: 0.9728
+new record!train Loss: 0.0712 Acc: 0.9764
+val Loss: 0.0693 Acc: 0.9743
+new record!train Loss: 0.0639 Acc: 0.9787
+val Loss: 0.0632 Acc: 0.9762
+new record!train Loss: 0.0607 Acc: 0.9787
+val Loss: 0.0653 Acc: 0.9772
+new record!train Loss: 0.0500 Acc: 0.9828
+val Loss: 0.0624 Acc: 0.9778
+new record!train Loss: 0.0464 Acc: 0.9848
+val Loss: 0.0646 Acc: 0.9767
+train Loss: 0.0493 Acc: 0.9831
+val Loss: 0.0601 Acc: 0.9789
+new record!train Loss: 0.0476 Acc: 0.9843
+val Loss: 0.0580 Acc: 0.9788
+train Loss: 0.0472 Acc: 0.9848
+val Loss: 0.0594 Acc: 0.9787
+train Loss: 0.0456 Acc: 0.9848
+val Loss: 0.0592 Acc: 0.9788
+train Loss: 0.0474 Acc: 0.9839
+val Loss: 0.0571 Acc: 0.9800
+new record!train Loss: 0.0456 Acc: 0.9840
+val Loss: 0.0585 Acc: 0.9790
+train Loss: 0.0449 Acc: 0.9843
+val Loss: 0.0564 Acc: 0.9801
+new record!train Loss: 0.0435 Acc: 0.9854
+val Loss: 0.0589 Acc: 0.9791
+train Loss: 0.6786 Acc: 0.7895
+val Loss: 0.5912 Acc: 0.8203
+new record!train Loss: 0.3834 Acc: 0.8735
+val Loss: 0.3754 Acc: 0.8767
+new record!train Loss: 0.3026 Acc: 0.8988
+val Loss: 0.4510 Acc: 0.8620
+train Loss: 0.2672 Acc: 0.9105
+val Loss: 0.2864 Acc: 0.9106
+new record!train Loss: 0.2636 Acc: 0.9117
+val Loss: 0.2746 Acc: 0.9093
+train Loss: 0.1710 Acc: 0.9438
+val Loss: 0.1181 Acc: 0.9593
+new record!train Loss: 0.1365 Acc: 0.9520
+val Loss: 0.1055 Acc: 0.9622
+new record!train Loss: 0.1144 Acc: 0.9622
+val Loss: 0.0993 Acc: 0.9642
+new record!train Loss: 0.1074 Acc: 0.9633
+val Loss: 0.0918 Acc: 0.9674
+new record!train Loss: 0.0970 Acc: 0.9660
+val Loss: 0.0898 Acc: 0.9686
+new record!train Loss: 0.0933 Acc: 0.9679
+val Loss: 0.0855 Acc: 0.9702
+new record!train Loss: 0.0909 Acc: 0.9696
+val Loss: 0.0843 Acc: 0.9709
+new record!train Loss: 0.0858 Acc: 0.9699
+val Loss: 0.0831 Acc: 0.9710
+new record!train Loss: 0.0890 Acc: 0.9694
+val Loss: 0.0826 Acc: 0.9712
+new record!train Loss: 0.0851 Acc: 0.9710
+val Loss: 0.0824 Acc: 0.9713
+new record!train Loss: 0.0851 Acc: 0.9721
+val Loss: 0.0821 Acc: 0.9713
+new record!train Loss: 0.0838 Acc: 0.9722
+val Loss: 0.0824 Acc: 0.9709
+train Loss: 0.0871 Acc: 0.9707
+val Loss: 0.0822 Acc: 0.9712
+train Loss: 0.0882 Acc: 0.9704
+val Loss: 0.0816 Acc: 0.9719
+new record!train Loss: 0.0824 Acc: 0.9712
+val Loss: 0.0815 Acc: 0.9716
