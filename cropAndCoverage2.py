@@ -4,7 +4,7 @@ Created on Fri Dec 18 16:51:35 2020
 
 @author: young
 """
-
+from PIL import Image
 import matplotlib.pylab as plt
 import matplotlib.image as mpimg
 import numpy as np
