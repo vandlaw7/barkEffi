@@ -115,85 +115,6 @@ class RandomCropMy(object):
         return best_image
 
 
-def normalize(img_rgb):
-    return ss.zscore(img_rgb)
-
-
-def random_cropping(img_rgb):  # 랜덤 크롭, 임의의 점을 찍고 그 점을 기준으로 +- 165만큼을 고름
-    x = rn.randrange(165, img_rgb.shape[0] - 165)
-    y = rn.randrange(165, img_rgb.shape[1] - 165)
-    cropped = img_rgb[x - 165:x + 166, y - 165:y + 166, :]
-    return cropped
-
-
-def max_G(img_rgb):  # G가 가장 큰 픽셀 찾기
-    maxG = np.zeros((img_rgb.shape[0], img_rgb.shape[1]))
-    for i in range(img_rgb.shape[0]):
-        for j in range(img_rgb.shape[1]):
-            if (img_rgb[i, j, 1] > img_rgb[i, j, 0] + 0.15 and img_rgb[i, j, 1] > img_rgb[i, j, 2] + 0.15):
-                maxG[i, j] = 1
-
-    return maxG
-
-
-def max_R(img_rgb):  # R이 가장 큰 픽셀 찾기
-    maxR = np.zeros((img_rgb.shape[0], img_rgb.shape[1]))
-    for i in range(img_rgb.shape[0]):
-        for j in range(img_rgb.shape[1]):
-            if (img_rgb[i, j, 0] > img_rgb[i, j, 1] + 0.15 and img_rgb[i, j, 0] > img_rgb[i, j, 2] + 0.15):
-                maxR[i, j] = 1
-
-    return maxR
-
-
-def cover_rate(img_rgb):  # 피복도 구하기 - 픽셀 중 분류된 값의 비 구함
-    nonzero = 0
-    for i in range(img_rgb.shape[0]):
-        for j in range(img_rgb.shape[1]):
-            if img_rgb[i, j] != 0:
-                nonzero = nonzero + 1
-    covered = nonzero / (img_rgb.shape[0] * img_rgb.shape[1])
-
-    return covered
-
-
-class RandomCropMy2(object):
-    def __init__(self, output_size):
-        assert isinstance(output_size, (int, tuple))
-        if isinstance(output_size, int):
-            self.output_size = (output_size, output_size)
-        else:
-            assert len(output_size) == 2
-            self.output_size = output_size
-
-    def __call__(self, image, gap=GREEN_GAP, threshold=GREEN_THRESHOLD,
-                 iteration_max=GREEN_ITERATION_MAX):
-        w, h = image.size
-        new_w, new_h = self.output_size
-
-        img_rgb = np.array(image)
-        image_normalized = normalize(img_rgb)
-
-        iteration = 0
-        best_image = image
-        green_best = 1
-        while iteration < iteration_max:
-            croppedimg = random_cropping(image_normalized)
-            img_R = max_R(croppedimg)
-            img_G = max_G(croppedimg)
-            cover_rate_rg = cover_rate(img_R) + cover_rate(img_G)
-
-            if cover_rate_rg > threshold:
-                iteration += 1
-                if green_record < green_best:
-                    green_best = green_record
-                    best_image = crop_image
-            else:
-                return croppedimg
-
-        return best_image
-
-
 def data_fraction(dataset, fraction=fraction):
     return torch.utils.data.Subset(dataset,
                                    numpy.random.choice(len(dataset), int(len(dataset) * fraction), replace=False))
@@ -209,6 +130,7 @@ def convert_to_preferred_format(sec):
 
 
 test_transform = transforms.Compose([
+    transforms.RandomCropMy(334),
     transforms.Resize((200, 200)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
@@ -228,7 +150,7 @@ for i in range(10):
     max_batch_idx = test_set_size // BATCH_SIZE
 
     test_image_loaded = DataLoader(test_image_dataset, batch_size=BATCH_SIZE,
-                                   shuffle=False, num_workers=4)
+                                   shuffle=True, num_workers=4)
 
     device = torch.device("cuda:0")
     model = EfficientNet.from_pretrained(f'efficientnet-b{effi_version}', num_classes=num_classes)

@@ -30,9 +30,9 @@ torch.cuda.empty_cache()
 '''hyper parameter'''
 num_classes = 17
 batch_size = 64
-epochs = 20
+epochs = 25
 
-fraction = 0.3
+fraction = 1
 effi_version = 0
 
 check_period = 100 * fraction
@@ -142,21 +142,21 @@ for epoch in range(epochs):
 
         print('{} Loss: {:.4f} Acc: {:.4f}'.format(
             phase, epoch_loss, epoch_acc))
-        f = open('./val.txt', 'a')
+        f = open('./val2.txt', 'a')
         f.write('{} Loss: {:.4f} Acc: {:.4f}\n'.format(phase, epoch_loss, epoch_acc))
 
         if phase == 'val' and epoch_acc > best_acc:
             print('new record!')
-            f.write('new record!')
+            f.write('new record!\n')
             best_acc = epoch_acc
             best_model_weights = copy.deepcopy(model.state_dict())
-            torch.save(best_model_weights, './weights/best_weights_b0_class_17_aug_50.pth')
+            torch.save(best_model_weights, './weights/best_weights_b0_class_17_aug_100.pth')
             torch.save({
                 'epoch': epoch,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
                 'epoch_loss': epoch_loss,
                 'epoch_acc': epoch_acc
-            }, './weights/best_weights_b0_class_17_aug_chk_50.pth')
+            }, './weights/best_weights_b0_class_17_aug_chk_100.pth')
 
         f.close()

@@ -116,6 +116,14 @@ def data_fraction(dataset, fraction=fraction):
     return torch.utils.data.Subset(dataset,
                                    numpy.random.choice(len(dataset), int(len(dataset) * fraction), replace=False))
 
+def convert_to_preferred_format(sec):
+    sec = sec % (24 * 3600)
+    hour = sec // 3600
+    sec %= 3600
+    min = sec // 60
+    sec %= 60
+    return "%02d:%02d:%02d" % (hour, min, sec)
+
 
 test_transform = transforms.Compose([
     transforms.Resize((200, 200)),
@@ -151,13 +159,7 @@ for i in range(10):
     scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
 
 
-    def convert_to_preferred_format(sec):
-        sec = sec % (24 * 3600)
-        hour = sec // 3600
-        sec %= 3600
-        min = sec // 60
-        sec %= 60
-        return "%02d:%02d:%02d" % (hour, min, sec)
+
 
 
     ''' inference run'''
