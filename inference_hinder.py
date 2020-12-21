@@ -129,20 +129,21 @@ def convert_to_preferred_format(sec):
     return "%02d:%02d:%02d" % (hour, min, sec)
 
 
-test_transform = transforms.Compose([
+new_transform = transforms.Compose([
     RandomCropMy(334),
     transforms.Resize((200, 200)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
 ])
 
-new_transform = transforms.Compose([
-    RandomCropMy(200),
+test_transform = transforms.Compose([
+    transforms.CenterCrop(334),
+    transforms.Resize((200, 200)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
 ])
 
-for i in range(10):
+for i in range(5):
     print(f'{i}th check')
     test_image_dataset = data_fraction(
         datasets.ImageFolder(INPUT_PATH, (new_transform if GREEN_ESCAPE else test_transform)))
@@ -186,7 +187,7 @@ for i in range(10):
     total_loss = running_loss / test_set_size
     total_acc = running_corrects.double() / test_set_size
 
-    f = open('./test_result2.txt', 'a')
+    f = open('./test_result3.txt', 'a')
     print(f'total loss: {total_loss}, total accuracy: {total_acc}')
     f.write(
         f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH} total loss: {total_loss}, total accuracy: {total_acc}\n')
