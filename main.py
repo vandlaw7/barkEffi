@@ -62,7 +62,6 @@ def data_fraction(dataset, fraction=fraction):
                                    numpy.random.choice(len(dataset), int(len(dataset) * fraction), replace=False))
 
 
-
 # class_names = image_datasets['train'].classes
 
 ''' data load '''
@@ -82,12 +81,11 @@ best_acc = 0.0
 
 for epoch in range(epochs):
 
-    print('Epoch {}/{}'.format(epoch , epochs-1))
+    print('Epoch {}/{}'.format(epoch, epochs - 1))
     print('-' * 10)
 
-    image_datasets = {x: data_fraction(datasets.ImageFolder(os.path.join(data_dir, x),
-                                                            data_transforms[x]))
-                      for x in ['train', 'val']}
+    image_datasets = {data_fraction(datasets.ImageFolder(os.path.join(data_dir, 'train'), data_transforms['train'])),
+                      datasets.ImageFolder(os.path.join(data_dir, 'test'), data_transforms['test'])}
 
     batch_idx_max_train = len(image_datasets['train']) // batch_size
     batch_idx_max_val = len(image_datasets['val']) // batch_size
