@@ -32,7 +32,7 @@ num_classes = 17
 batch_size = 64
 epochs = 25
 
-fraction = 1
+fraction = 1.0
 effi_version = 0
 
 check_period = 100 * fraction
