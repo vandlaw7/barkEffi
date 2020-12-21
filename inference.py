@@ -16,7 +16,7 @@ import sys
 import getopt
 
 GREEN_ESCAPE = False
-INPUT_PATH = '../DL_Final/barkSNU/hinder_test'
+INPUT_PATH = '../DL_Final/barkSNU/test'
 
 
 def main(argv):
