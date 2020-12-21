@@ -46,14 +46,11 @@ print(f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH}')
 effi_version = 0
 num_classes = 17
 
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 N_WORKERS = 4
 N_EPOCHS = 5
 
-HEIGHT = 137
-WIDTH = 236
-
-WEIGHTS_FILE = './weights/backup/best_weights_b0_class_17_aug_50.pth'
+WEIGHTS_FILE = './weights/best_weights_b0_class_17_aug_50.pth'
 
 fraction = 1
 check_period = 1
