@@ -53,7 +53,7 @@ N_EPOCHS = 5
 HEIGHT = 137
 WIDTH = 236
 
-WEIGHTS_FILE = './weights/best_weights_b0_class_17.pth'
+WEIGHTS_FILE = './weights/best_weights_b0_class_17_aug_50.pth'
 
 fraction = 1
 check_period = 1
