@@ -84,8 +84,10 @@ for epoch in range(epochs):
     print('Epoch {}/{}'.format(epoch, epochs - 1))
     print('-' * 10)
 
-    image_datasets = {data_fraction(datasets.ImageFolder(os.path.join(data_dir, 'train'), data_transforms['train'])),
-                      datasets.ImageFolder(os.path.join(data_dir, 'val'), data_transforms['val'])}
+    image_datasets = {
+        'train': data_fraction(datasets.ImageFolder(os.path.join(data_dir, 'train'), data_transforms['train'])),
+        'val': datasets.ImageFolder(os.path.join(data_dir, 'val'), data_transforms['val'])
+    }
 
     batch_idx_max_train = len(image_datasets['train']) // batch_size
     batch_idx_max_val = len(image_datasets['val']) // batch_size
