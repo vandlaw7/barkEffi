@@ -8,3 +8,6 @@ GREEN_ESCAPE: False, INPUT_PATH: ../DL_Final/barkSNU/hinder_test total loss: 2.1
 GREEN_ESCAPE: False, INPUT_PATH: ../DL_Final/barkSNU/hinder_test total loss: 2.05537480997616, total accuracy: 0.6804733727810651
 GREEN_ESCAPE: False, INPUT_PATH: ../DL_Final/barkSNU/hinder_test total loss: 2.004624949404474, total accuracy: 0.7337278106508875
 GREEN_ESCAPE: False, INPUT_PATH: ../DL_Final/barkSNU/hinder_test total loss: 1.97062215579332, total accuracy: 0.6627218934911242
+GREEN_ESCAPE: False, INPUT_PATH: ../DL_Final/barkSNU/hinder_test total loss: 2.014498129398865, total accuracy: 0.7218934911242604
+GREEN_ESCAPE: False, INPUT_PATH: ../DL_Final/barkSNU/hinder_test total loss: 2.0429079405654815, total accuracy: 0.7159763313609467
+GREEN_ESCAPE: False, INPUT_PATH: ../DL_Final/barkSNU/hinder_test total loss: 2.059953682521391, total accuracy: 0.7218934911242604
