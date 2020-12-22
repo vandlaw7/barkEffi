@@ -53,7 +53,7 @@ BATCH_SIZE = 64
 N_WORKERS = 4
 N_EPOCHS = 5
 
-WEIGHTS_FILE = './weights/best_weights_b0_class_17_aug_50.pth'
+WEIGHTS_FILE = './weights/best_weights_b0_class_17_aug_100.pth'
 
 fraction = 1
 check_period = 1
@@ -187,7 +187,7 @@ for i in range(5):
     total_loss = running_loss / test_set_size
     total_acc = running_corrects.double() / test_set_size
 
-    f = open('./test_result3.txt', 'a')
+    f = open('./log/test_result3.txt', 'a')
     print(f'total loss: {total_loss}, total accuracy: {total_acc}')
     f.write(
         f'GREEN_ESCAPE: {GREEN_ESCAPE}, INPUT_PATH: {INPUT_PATH} total loss: {total_loss}, total accuracy: {total_acc}\n')

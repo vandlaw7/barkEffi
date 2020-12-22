@@ -142,7 +142,7 @@ for epoch in range(epochs):
 
         print('{} Loss: {:.4f} Acc: {:.4f}'.format(
             phase, epoch_loss, epoch_acc))
-        f = open('./val2.txt', 'a')
+        f = open('./log/val2.txt', 'a')
         f.write('{} Loss: {:.4f} Acc: {:.4f}\n'.format(phase, epoch_loss, epoch_acc))
 
         if phase == 'val' and epoch_acc > best_acc:
